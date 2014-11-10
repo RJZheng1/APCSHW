@@ -18,7 +18,7 @@ public class SuperArray{
     }
     public void add(int index, Object o){
 	if(elements == data.length)
-	    resize(data.length + 1);
+	    resize(data.length * 2);
 	for(int i = elements - 1;i >= index;i--)
 	    data[i + 1] = data[i];
 	data[index] = o;
@@ -56,6 +56,9 @@ public class SuperArray{
 	}
     }
     public Object remove(int index){
+    	if(data.length >= elements * 4){
+    		resize(data.length / 2)
+    	}
 	if(index >= 0 && index < size()){
 	    Object old = data[index];
 	    data[index] = null;
