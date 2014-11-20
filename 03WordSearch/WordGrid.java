@@ -3,13 +3,13 @@ public class WordGrid{
     public static void main(String[]args){
 	WordGrid g = new WordGrid(13,13);
 	System.out.println(g);
-	g.addWordHorizontal("DUCK",0,0);
+	g.addWord("DUCK",0,0,new int[]{1,0});
 	System.out.println(g);
-	g.addWordVertical("CHICKEN",0,2);
+	g.addWord("CHICKEN",2,2,new int[]{0,1});
 	System.out.println(g);
-	g.addWordDiagonal("TURKEY",2,2);
+	g.addWord("TURKEY",2,2,new int[]{1,1});
 	System.out.println(g);
-	g.addWordHorizontal("TURDUCKEN",0,13);
+	g.addWord("TURDUCKEN",0,13,new int[]{1,1});
     }
     /**Initializes a grid of the specified size and fills all of the positions 
      *with spaces.
@@ -20,7 +20,6 @@ public class WordGrid{
 	data = new char[rows][cols];
 	clear();
     }
-    /**Sets all the values in the WordGrid to spaces.*/
     private void clear(){
 	for(int a = 0;a < data.length;a++){
 	    for(int b = 0;b < data[a].length;b++)
@@ -49,62 +48,16 @@ public class WordGrid{
      *@param col is the horizontal location that you want the word to start at.
      *@return true when the word is added successfully and false if otherwise.
      */
-    public boolean addWordHorizontal(String word,int row,int col){
-	if(row >= 0 && row < data.length && col >= 0 && col + word.length() < data[0].length){
+    public boolean addWord(String word,int row,int col,int[]dir){
+	if(dir == null || dir.length != 2 || dir[0] < 0 || dir[0] > 1 || dir[1] < 0 || dir[1] > 1 || (dir[0] == 0 && dir[1] == 0))
+	    return false;
+	if(row >= 0 && row + word.length() * dir[1] < data.length && col >= 0 && col + word.length() * dir[0] < data[0].length){
 	    for(int x = 0;x < word.length();x++){
-		if(data[row][col + x] == ' ')
-		    data[row][col + x] = word.charAt(x);
-		else if(data[row][col + x] != word.charAt(x)){
+		if(data[row + x + dir[1]][col + x + dir[0]] == ' ')
+		    data[row + x + dir[1]][col + x + dir[0]] = word.charAt(x);
+		else if(data[row + x + dir[1]][col + x + dir[0]] != word.charAt(x)){
 		    for(;x > 0;x--)
-			data[row][col + x - 1] = ' ';
-		    return false;
-		}
-	    }
-	    return true;
-	}
-	return false;
-    }
-    /**Attempts to add a given word to the specified position of the WordGrid.
-     *The word is added from top to bottom, must fit on the WordGrid and must
-     *have a corresponding letter to match any letters that it overlaps.
-     *
-     *@param word is any word to be added to the WordGrid.
-     *@param row is the vertical location that you want the word to start at.
-     *@param col is the horizontal location that you want the word to start at.
-     *@return true when the word is added successfully and false if otherwise.
-     */
-    public boolean addWordVertical(String word,int row,int col){
-	if(row >= 0 && row + word.length() < data.length && col >= 0 && col < data.length){
-	    for(int x = 0;x < word.length();x++){
-		if(data[row + x][col] == ' ')
-		    data[row + x][col] = word.charAt(x);
-		else if(data[row + x][col] != word.charAt(x)){
-		    for(;x > 0;x--)
-			data[row][col + x - 1] = ' ';
-		    return false;
-		}
-	    }
-	    return true;
-	}
-	return false;
-    }	   
-    /**Attempts to add a given word to the specified position of the WordGrid.
-     *The word is added from top left to bottom right, must fit on the WordGrid and must
-     *have a corresponding letter to match any letters that it overlaps.
-     *
-     *@param word is any word to be added to the WordGrid.
-     *@param row is the vertical location that you want the word to start at.
-     *@param col is the horizontal location that you want the word to start at.
-     *@return true when the word is added successfully and false if otherwise.
-     */
-    public boolean addWordDiagonal(String word,int row,int col){
-	if(row >= 0 && row + word.length() < data.length && col >= 0 && col + word.length() < data[0].length){
-	    for(int x = 0;x < word.length();x++){
-		if(data[row + x][col + x] == ' ')
-		   data[row + x][col + x] = word.charAt(x);
-		else if(data[row + x][col + x] != word.charAt(x)){
-		    for(;x > 0;x--)
-			data[row + x - 1][col + x - 1] = ' ';
+			data[row + x - dir[1]][col + x - dir[0]] = ' ';
 		    return false;
 		}
 	    }
