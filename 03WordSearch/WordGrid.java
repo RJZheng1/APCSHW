@@ -7,4 +7,11 @@ public class WordGrid{
     public WordGrid(int rows,int cols){
 	data = new char[rows][cols];
     }
+    /**Sets all the values in the WordGrid to spaces.*/
+    private void clear(){
+	for(int a = 0;a < data.length;a++){
+	    for(int b = 0;b < data[a].length;b++)
+		data[a][b] = ' ';
+	}
+    }
 }
