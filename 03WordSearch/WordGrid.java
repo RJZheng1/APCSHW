@@ -5,9 +5,9 @@ public class WordGrid{
 	System.out.println(g);
 	g.addWord("DUCK",0,0,new int[]{1,0});
 	System.out.println(g);
-	g.addWord("CHICKEN",2,2,new int[]{0,1});
+	g.addWord("CHICKEN",0,2,new int[]{0,1});
 	System.out.println(g);
-	g.addWord("TURKEY",2,2,new int[]{1,1});
+	g.addWord("TURKEY",1,3,new int[]{1,1});
 	System.out.println(g);
 	g.addWord("TURDUCKEN",0,13,new int[]{1,1});
     }
@@ -49,15 +49,15 @@ public class WordGrid{
      *@return true when the word is added successfully and false if otherwise.
      */
     public boolean addWord(String word,int row,int col,int[]dir){
-	if(dir == null || dir.length != 2 || dir[0] < 0 || dir[0] > 1 || dir[1] < 0 || dir[1] > 1 || (dir[0] == 0 && dir[1] == 0))
+	if(dir == null || dir.length != 2 || dir[0] < -1 || dir[0] > 1 || dir[1] < -1 || dir[1] > 1 || (dir[0] == 0 && dir[1] == 0))
 	    return false;
-	if(row >= 0 && row + word.length() * dir[1] < data.length && col >= 0 && col + word.length() * dir[0] < data[0].length){
+	if(row + word.length() * dir[1] >= 0 && row + word.length() * dir[1] < data.length && col + word.length() * dir[0] >= 0 && col + word.length() * dir[0] < data[0].length){
 	    for(int x = 0;x < word.length();x++){
-		if(data[row + x + dir[1]][col + x + dir[0]] == ' ')
-		    data[row + x + dir[1]][col + x + dir[0]] = word.charAt(x);
-		else if(data[row + x + dir[1]][col + x + dir[0]] != word.charAt(x)){
+		if(data[row + x * dir[1]][col + x * dir[0]] == ' ')
+		    data[row + x * dir[1]][col + x * dir[0]] = word.charAt(x);
+		else if(data[row + x * dir[1]][col + x * dir[0]] != word.charAt(x)){
 		    for(;x > 0;x--)
-			data[row + x - dir[1]][col + x - dir[0]] = ' ';
+			data[row - x * dir[1]][col - x * dir[0]] = ' ';
 		    return false;
 		}
 	    }
