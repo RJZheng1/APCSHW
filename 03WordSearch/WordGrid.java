@@ -4,15 +4,9 @@ import java.io.*;
 public class WordGrid{
     private char[][]data;
     public static void main(String[]args){
-	WordGrid g = new WordGrid(13,13);
+	WordGrid g = new WordGrid(20,20);
+	g.addWords(readFile("Words.txt"));
 	System.out.println(g);
-	g.addWord("DUCK",0,0,0);
-	System.out.println(g);
-	g.addWord("CHICKEN",0,2,90);
-	System.out.println(g);
-	g.addWord("TURKEY",1,3,45);
-	System.out.println(g);
-	g.addWord("TURDUCKEN",0,13,315);
     }
     /**Initializes a grid of the specified size and fills all of the positions 
      *with spaces.
@@ -64,19 +58,23 @@ public class WordGrid{
 		if(data[row + x * ydir][col + x * xdir] == ' ')
 		    data[row + x * ydir][col + x * xdir] = word.charAt(x);
 		else
-		    throw new IndexOutOfBoundsException();
+		    throw new ArrayIndexOutOfBoundsException();
 	    }
-	}catch(IndexOutOfBoundsException e){
+	}catch(ArrayIndexOutOfBoundsException e){
 	    for(;x > 0;x--)
-		data[row - x * ydir][col - x * xdir] = ' ';
+		data[row + x * ydir - ydir][col + x * xdir - xdir] = ' ';
 	    return false;
 	}
 	return true;
     }
-    public static ArrayList<String> readFile(String fileAddress){
-	ArrayList words = new ArrayList();
+    /**Takes a text file filed with words and puts them into an ArrayList of Strings.
+     *@param fileName is the name of the file you wish to read.
+     *@return an ArrayList of Strings containing all the words.
+     */
+    public static ArrayList<String> readFile(String fileName){
+	ArrayList<String> words = new ArrayList<String>();
 	try{
-	    File inFile = new File(fileAddress);
+	    File inFile = new File(fileName);
 	    Scanner in = new Scanner(inFile);
 	    while(in.hasNextLine())
 		words.add(in.nextLine());
@@ -84,5 +82,26 @@ public class WordGrid{
 	    readFile("Words.txt");
 	}
 	return words;
+    }
+    /**Takes an ArrayList of Strings and attempts to add them to the WordGrid.
+     *@param words is an ArrayList of Strings containing the words you want to add.
+     */
+    public void addWords(ArrayList<String> words){
+	Random RNG = new Random();
+	for(int x = 0;x < words.size();x++){
+	    boolean done = false;
+	    for(int a = 0;a < 100;a++){
+		int row = RNG.nextInt(data.length);
+		int col = RNG.nextInt(data.length);
+		for(int dir = 0;dir < 360;dir += 45){
+		    if(addWord(words.get(x),row,col,dir)){
+			done = true;
+			break;
+		    }
+		}
+		if(done == true)
+		    break;
+	    }
+	}
     }
 }
