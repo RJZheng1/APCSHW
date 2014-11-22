@@ -1,15 +1,17 @@
+import java.util.*;
+
 public class WordGrid{
     private char[][]data;
     public static void main(String[]args){
 	WordGrid g = new WordGrid(13,13);
 	System.out.println(g);
-	g.addWord("DUCK",0,0,new int[]{1,0});
+	g.addWord("DUCK",0,0,0);
 	System.out.println(g);
-	g.addWord("CHICKEN",0,2,new int[]{0,1});
+	g.addWord("CHICKEN",0,2,90);
 	System.out.println(g);
-	g.addWord("TURKEY",1,3,new int[]{1,1});
+	g.addWord("TURKEY",1,3,45);
 	System.out.println(g);
-	g.addWord("TURDUCKEN",0,13,new int[]{1,1});
+	g.addWord("TURDUCKEN",0,13,315);
     }
     /**Initializes a grid of the specified size and fills all of the positions 
      *with spaces.
@@ -46,18 +48,24 @@ public class WordGrid{
      *@param word is any word to be added to the WordGrid.
      *@param row is the vertical location that you want the word to start at.
      *@param col is the horizontal location that you want the word to start at.
+     *@param dir is the angle you want the word to be added in, in degrees.
+     *dir must be divisible by 45. Also, remember that down is positive.
      *@return true when the word is added successfully and false if otherwise.
      */
-    public boolean addWord(String word,int row,int col,int[]dir){
-	if(dir == null || dir.length != 2 || dir[0] < -1 || dir[0] > 1 || dir[1] < -1 || dir[1] > 1 || (dir[0] == 0 && dir[1] == 0))
+    public boolean addWord(String word,int row,int col,int dir){
+	if(dir %45 != 0)
 	    return false;
-	if(row + word.length() * dir[1] >= 0 && row + word.length() * dir[1] < data.length && col + word.length() * dir[0] >= 0 && col + word.length() * dir[0] < data[0].length){
+	int xdir = (int)Math.round(Math.cos(dir * Math.PI / 180));
+	int ydir = (int)Math.round(Math.sin(dir * Math.PI / 180));
+	System.out.println(xdir);
+	System.out.println(ydir);
+	if(row + word.length() * ydir >= 0 && row + word.length() * ydir < data.length && col + word.length() * xdir >= 0 && col + word.length() * xdir < data[0].length){
 	    for(int x = 0;x < word.length();x++){
-		if(data[row + x * dir[1]][col + x * dir[0]] == ' ')
-		    data[row + x * dir[1]][col + x * dir[0]] = word.charAt(x);
-		else if(data[row + x * dir[1]][col + x * dir[0]] != word.charAt(x)){
+		if(data[row + x * ydir][col + x * xdir] == ' ')
+		    data[row + x * ydir][col + x * xdir] = word.charAt(x);
+		else if(data[row + x * ydir][col + x * xdir] != word.charAt(x)){
 		    for(;x > 0;x--)
-			data[row - x * dir[1]][col - x * dir[0]] = ' ';
+			data[row - x * ydir][col - x * xdir] = ' ';
 		    return false;
 		}
 	    }
