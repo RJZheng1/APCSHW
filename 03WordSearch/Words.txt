@@ -1,0 +1,13 @@
+Chicken
+Duck
+Turkey
+Pig
+Cow
+Deer
+Lamb
+Rabbit
+Fish
+Lobster
+Shrimp
+Oyster
+Mussel

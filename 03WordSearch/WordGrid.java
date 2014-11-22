@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 public class WordGrid{
     private char[][]data;
@@ -57,20 +58,31 @@ public class WordGrid{
 	    return false;
 	int xdir = (int)Math.round(Math.cos(dir * Math.PI / 180));
 	int ydir = (int)Math.round(Math.sin(dir * Math.PI / 180));
-	System.out.println(xdir);
-	System.out.println(ydir);
-	if(row + word.length() * ydir >= 0 && row + word.length() * ydir < data.length && col + word.length() * xdir >= 0 && col + word.length() * xdir < data[0].length){
-	    for(int x = 0;x < word.length();x++){
+	int x = 0;
+	try{
+	    for(;x < word.length();x++){
 		if(data[row + x * ydir][col + x * xdir] == ' ')
 		    data[row + x * ydir][col + x * xdir] = word.charAt(x);
-		else if(data[row + x * ydir][col + x * xdir] != word.charAt(x)){
-		    for(;x > 0;x--)
-			data[row - x * ydir][col - x * xdir] = ' ';
-		    return false;
-		}
+		else
+		    throw new IndexOutOfBoundsException();
 	    }
-	    return true;
+	}catch(IndexOutOfBoundsException e){
+	    for(;x > 0;x--)
+		data[row - x * ydir][col - x * xdir] = ' ';
+	    return false;
 	}
-	return false;
+	return true;
+    }
+    public static ArrayList<String> readFile(String fileAddress){
+	ArrayList words = new ArrayList();
+	try{
+	    File inFile = new File(fileAddress);
+	    Scanner in = new Scanner(inFile);
+	    while(in.hasNextLine())
+		words.add(in.nextLine());
+	}catch(FileNotFoundException e){
+	    readFile("Words.txt");
+	}
+	return words;
     }
 }
