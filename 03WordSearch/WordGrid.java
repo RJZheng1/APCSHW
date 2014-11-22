@@ -6,6 +6,7 @@ public class WordGrid{
     public static void main(String[]args){
 	WordGrid g = new WordGrid(20,20);
 	g.addWords(readFile("Words.txt"));
+	g.addRandomLetters();
 	System.out.println(g);
     }
     /**Initializes a grid of the specified size and fills all of the positions 
@@ -101,6 +102,16 @@ public class WordGrid{
 		}
 		if(done == true)
 		    break;
+	    }
+	}
+    }
+    public void addRandomLetters(){
+	char[] letters = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+	Random RNG = new Random();
+	for(int a = 0;a < data.length;a++){
+	    for(int b = 0;b < data[a].length;b++){
+		if(data[a][b] == ' ')
+		    data[a][b] = letters[RNG.nextInt(26)];
 	    }
 	}
     }
