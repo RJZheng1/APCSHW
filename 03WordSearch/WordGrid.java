@@ -5,12 +5,6 @@ public class WordGrid{
     private char[][]data;
     private Random RNG = new Random();
     ArrayList<String> wordsAdded = new ArrayList<String>();
-    public static void main(String[]args) throws FileNotFoundException{
-	WordGrid g = new WordGrid(20,20);
-	g.loadWordsFromFile("Words.txt",false);
-	System.out.println("Find these words:\n" + g.wordsInPuzzle());
-	System.out.println(g);
-    }
     /**Initializes a grid of the specified size and fills all of the positions 
      *with spaces.
      *@param row is the starting height of the WordGrid
@@ -20,6 +14,9 @@ public class WordGrid{
 	data = new char[rows][cols];
 	clear();
     }
+    /**Sets the random seed of the Random object.
+     *@param seed is the seed you wish the Random object to have.
+     */
     public void setSeed(long seed){
 	RNG.setSeed(seed);
     }
@@ -30,7 +27,7 @@ public class WordGrid{
 		data[a][b] = '_';
 	}
     }
-    /**Adds a random letter to each underscore in the WordGrid
+    /**Replaces each underscore in the WordGrid with a random letter.
      */
     public void addRandomLetters(){
 	Random RNG = new Random();
@@ -54,6 +51,9 @@ public class WordGrid{
 	}
 	return output;
     }
+    /**The proper formatting for the added words is created in the wordsInPuzzle.
+     *@return A properly formatted String containing all the added words.
+     */
     public String wordsInPuzzle(){
 	String words = "";
 	for(int x = 0;x < wordsAdded.size();x++){
@@ -65,9 +65,6 @@ public class WordGrid{
 	}
 	return words;
     }
-    /**Sets the seed of the Random object.
-     *@param seed is the number you want the seed of Random object to be.
-     */
     /**Attempts to add a given word to the specified position of the WordGrid.
      *The word is added from left to right, must fit on the WordGrid and must
      *have a corresponding letter to match any letters that it overlaps.
@@ -82,7 +79,7 @@ public class WordGrid{
     public boolean addWord(String word,int row,int col,int dir){
 	int xdir = (int)Math.round(Math.cos(dir * Math.PI / 180));
 	int ydir = (int)Math.round(Math.sin(dir * Math.PI / 180));
-	if(dir %45 != 0 || row + word.length() * ydir < -1 || row + word.length() * ydir> data.length || col + word.length() * xdir < -1 || col + word.length() * xdir> data[0].length)
+	if(dir %45 != 0 || row + word.length() * ydir < -1 || row + word.length() * ydir > data.length || col + word.length() * xdir < -1 || col + word.length() * xdir > data[0].length)
 	    return false;
 	for(int x = 0;x < word.length();x++){
 	    if(data[row][col] == '_'){
@@ -113,7 +110,7 @@ public class WordGrid{
 	    words.add(in.nextLine());
 	for(int x = 0;x < words.size();x++){
 	    for(int a = 0;a < 100;a++){
-		if(addWord(words.get(x),RNG.nextInt(data.length),RNG.nextInt(data.length),45 * RNG.nextInt(8))){
+		if(addWord(words.get(x),RNG.nextInt(data.length),RNG.nextInt(data[0].length),45 * RNG.nextInt(8))){
 		    wordsAdded.add(words.get(x));
 		    break;
 		}
