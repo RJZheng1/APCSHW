@@ -20,15 +20,13 @@ public class WordGrid{
     public void setSeed(long seed){
 	RNG.setSeed(seed);
     }
-    /**Set all values in the WordGrid to underscores ' '*/
     private void clear(){
 	for(int a = 0;a < data.length;a++){
 	    for(int b = 0;b < data[a].length;b++)
 		data[a][b] = '_';
 	}
     }
-    /**Replaces each underscore in the WordGrid with a random letter.
-     */
+    /**Replaces each underscore in the WordGrid with a random letter.*/
     public void addRandomLetters(){
 	Random RNG = new Random();
 	for(int a = 0;a < data.length;a++){
@@ -37,19 +35,6 @@ public class WordGrid{
 		    data[a][b] = (char)('A' + RNG.nextInt(26));
 	    }
 	}
-    }
-    /**The proper formatting for a WordGrid is created in the toString.
-     *@return a String with each character separated by spaces and each row
-     *separated by new lines.
-     */
-    public String toString(){
-	String output = "";
-	for(int a = 0;a < data.length;a++){
-	    for(int b = 0;b < data[a].length;b++)
-		output = output + data[a][b] + " ";
-	    output += "\n";
-	}
-	return output;
     }
     /**The proper formatting for the added words is created in the wordsInPuzzle.
      *@return A properly formatted String containing all the added words.
@@ -64,6 +49,19 @@ public class WordGrid{
 		words += "\n";
 	}
 	return words;
+    }
+    /**The proper formatting for a WordGrid is created in the toString.
+     *@return a String with each character separated by spaces and each row
+     *separated by new lines.
+     */
+    public String toString(){
+	String output = "";
+	for(int a = 0;a < data.length;a++){
+	    for(int b = 0;b < data[a].length;b++)
+		output = output + data[a][b] + " ";
+	    output += "\n";
+	}
+	return output;
     }
     /**Attempts to add a given word to the specified position of the WordGrid.
      *The word is added from left to right, must fit on the WordGrid and must
@@ -100,7 +98,8 @@ public class WordGrid{
     /**Takes a text file filed with words and puts them into the WordGrid.
      *@param fileName is the name of the file you wish to read.
      *@param fillRandomLetters is used to decide whether or not to add
-     *random letters to empty spaces.
+     * random letters to empty spaces.
+     *@return 
      */
     public void loadWordsFromFile(String fileName, boolean fillRandomLetters) throws FileNotFoundException{
 	ArrayList<String> words = new ArrayList<String>();
