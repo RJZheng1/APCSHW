@@ -1,25 +1,30 @@
 public class SuperArray{
-    Object[] data;
+    String[] data;
     int elements = 0;
     public SuperArray(){
-	data = new Object[10];
+	this(10);
     }
     public SuperArray(int size){
-	data = new Object[size];
+	data = new String[size];
     }
     public String toString(){
 	String a = " [ ";
-	for(int i = 0;i < elements;i++)
+	for(int i = 0;i < size();i++)
 	    a = a + data[i] + " ";
 	return a + "]";
     }
-    public void add(Object o){
-	add(elements,o);
-    }
-    public void add(int index, Object o){
-	if(elements == data.length)
+    public void add(String o){
+	if(size() == data.length)
 	    resize(data.length * 2);
-	for(int i = elements - 1;i >= index;i--)
+	data[size()] = o;
+	elements++;;
+    }
+    public void add(int index, String o){
+	if(index < 0 || index > size())
+	    throw new ArrayIndexOutOfBoundsException();
+	if(size() == data.length)
+	    resize(data.length * 2);
+	for(int i = size() - 1;i >= index;i--)
 	    data[i + 1] = data[i];
 	data[index] = o;
 	elements++;
@@ -28,48 +33,36 @@ public class SuperArray{
 	return elements;
     }
     public void resize(int newCapacity){
-	Object[] newArray = new Object[newCapacity];
-	for(int i = 0;i < elements;i++)
+	String[] newArray = new String[newCapacity];
+	int end = Math.min(newCapacity,size());
+	for(int i = 0;i < end;i++)
 	    newArray[i] = data[i];
+	data = newArray;
     }
     public void clear(){
-	for(int i = 0;i< elements;i++)
-	    data[i] = null;
 	elements = 0;
     }
-    public Object get(int index){
-	if(index >= 0 && index < size())
-	    return data[index];
-	else{
-	    System.out.println("Error, index out of range.");
-	    return null;
-	}
+    public String get(int index){
+	if(index < 0 && index > size())
+	    throw new ArrayIndexOutOfBoundsException();
+	return data[index];
     }
-    public Object set(int index, Object o){
-	if(index >= 0 && index < size()){
-	    Object old = data[index];
-	    data[index] = o;
-	    return old;
-	}else{
-	    System.out.println("Error, index out of range.");
-	    return null;
-	}
+    public String set(int index, String o){
+	if(index < 0 && index > size())
+	    throw new ArrayIndexOutOfBoundsException();
+	String old = data[index];
+	data[index] = o;
+	return old;
     }
-    public Object remove(int index){
-    	if(data.length >= elements * 4){
-    		resize(data.length / 2);
-    	}
-	if(index >= 0 && index < size()){
-	    Object old = data[index];
-	    data[index] = null;
-	    for(int i = index;i < elements;i++)
-		data[i] = data[i + 1];
-	    elements--;
-	    return old;
-	}else{
-	    System.out.println("Error, index out of range.");
-	    return null;
-	}
-
+    public String remove(int index){
+	if(index < 0 && index > size())
+	    throw new ArrayIndexOutOfBoundsException();
+	String old = data[index];
+	for(int i = index;i < size();i++)
+	    data[i] = data[i + 1];
+	elements--;
+    	if(data.length >= size() * 4)
+	    resize(data.length / 2);
+	return old;
     }
 }
