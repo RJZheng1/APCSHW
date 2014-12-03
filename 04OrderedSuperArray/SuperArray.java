@@ -65,4 +65,15 @@ public class SuperArray{
 	    resize(data.length / 2);
 	return old;
     }
+    public void insertionSort(){
+	for(int x = 1;x < data.length;x++){
+	    if(data[x].compareTo(data[x-1]) <= 0){
+		int i = x;
+		String temp = data[x];
+		for(;data[i].compareTo(temp) <= 0;i--)
+		    data[i] = data[i-1];
+		data[i] = temp;
+	    }
+	}
+    }
 }

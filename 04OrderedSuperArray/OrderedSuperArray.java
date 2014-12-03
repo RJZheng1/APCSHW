@@ -8,15 +8,10 @@ public class OrderedSuperArray extends SuperArray{
 	super(size);
     }
     public void add(String o){
-	super.add(o);
-	for(int x = 0;x < data.length;x++){
-	    if(data[x].compareTo(o) >= 0){
-		for(int i = x;i < data.length - 1;i++)
-		    data[i] = data[i - 1];
-		data[x] = o;
-		break;
-	    }
-	}
+	int x = 0;
+	while(data[x].compareTo(o) < 0)
+	    x ++;
+	super.add(x,o);
     }
     public void add(int index, String o){
 	add(o);
