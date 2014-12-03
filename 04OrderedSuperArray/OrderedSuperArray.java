@@ -1,16 +1,15 @@
-public class OrderedSuperArray extends SuperArray{
-    String[] data;
-    int elements = 0;
+public class OrderedSuperArray extends SuperArray{  
     public OrderedSuperArray(){
         this(10);
     }
     public OrderedSuperArray(int size){
 	super(size);
+	elements = 0;
     }
     public void add(String o){
 	int x = 0;
-	while(data[x].compareTo(o) < 0)
-	    x ++;
+	for(;x < size() && data[x].compareTo(o) < 0;x++){
+	}
 	super.add(x,o);
     }
     public void add(int index, String o){

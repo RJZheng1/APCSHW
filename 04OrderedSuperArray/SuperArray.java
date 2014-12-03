@@ -1,11 +1,12 @@
 public class SuperArray{
     String[] data;
-    int elements = 0;
+    int elements;
     public SuperArray(){
 	this(10);
     }
     public SuperArray(int size){
 	data = new String[size];
+	elements = 0;
     }
     public String toString(){
 	String a = " [ ";
@@ -66,13 +67,13 @@ public class SuperArray{
 	return old;
     }
     public void insertionSort(){
-	for(int x = 1;x < data.length;x++){
-	    if(data[x].compareTo(data[x-1]) <= 0){
-		int i = x;
+	for(int x = 1;x < size();x++){
+	    if(data[x].compareTo(data[x-1]) < 0){
+		int i = x - 1;
 		String temp = data[x];
-		for(;data[i].compareTo(temp) <= 0;i--)
-		    data[i] = data[i-1];
-		data[i] = temp;
+		for(;i >= 0 && temp.compareTo(data[i]) < 0;i--)
+		    data[i+1] = data[i];
+		data[i+1] = temp;
 	    }
 	}
     }
