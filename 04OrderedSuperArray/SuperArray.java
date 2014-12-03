@@ -1,3 +1,6 @@
+import java.lang.*;
+import java.util.*;
+
 public class SuperArray{
     String[] data;
     int elements;
@@ -76,5 +79,31 @@ public class SuperArray{
 		data[i+1] = temp;
 	    }
 	}
+    }
+    public void badInsertionSort(){
+        OrderedSuperArray c = new OrderedSuperArray();
+        while(this.size() > 0){ 
+            c.add(this.remove(0));
+        }
+        while(c.size() > 0){
+            this.add(c.remove(0));
+        }
+    }
+    public static void main(String[] args){
+	SuperArray g = new SuperArray();
+	Random RNG = new Random();
+	String[] rand = new String[100000];
+	for(int i = 0;i < 100000;i++){
+	    String word = "";
+	    for(int x = 0;x < 10;x++)
+		word = word + (char)('a' + RNG.nextInt(26));
+	    rand[i] = word;
+	}
+	for(String a:rand)
+	    g.add(a);
+	long start = System.currentTimeMillis();
+	g.insertionSort();
+	long end = System.currentTimeMillis();
+	System.out.println("time: " + (end - start) );
     }
 }
