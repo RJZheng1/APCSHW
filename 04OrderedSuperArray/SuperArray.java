@@ -115,14 +115,17 @@ public class SuperArray{
 		supes1.add(s);
 		supes2.add(s);
 	    }
-	    long start = System.currentTimeMillis();
+	    long start1 = System.currentTimeMillis();
 	    supes1.insertionSort();
-	    long end = System.currentTimeMillis();
-	    System.out.println("Test 1: " + (end - start));
-	    start = System.currentTimeMillis();
+	    long end1 = System.currentTimeMillis();
+	    long time1 = end1 - start1;
+	    System.out.println("Test 1: " + time1);
+	    long start2 = System.currentTimeMillis();
 	    supes2.badInsertionSort();
-	    end = System.currentTimeMillis();
-	    System.out.println("Test 2: " + (end - start));
+	    long end2 = System.currentTimeMillis();
+	    long time2 = end2 - start2;
+	    System.out.println("Test 2: " + time2);
+	    System.out.println("Takes " + (100*Math.abs(time2 - time1)/time2) + "% less time");
 	}
     }
 }
