@@ -22,4 +22,16 @@ public class OrderedSuperArray extends SuperArray{
 	add(o);
 	return e;
     }
+    public int find(String target){
+	int i = size()/2;
+	for(double x = 0.5;i >= 0 && i < size();x/=2){
+	    if(data[i].equals(target))
+	       break;
+	    else if(data[i].compareTo(target) > 0)
+		i -= x;
+	    else
+		i += x;		    
+	}
+	return i;
+    }
 }
