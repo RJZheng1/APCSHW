@@ -24,13 +24,19 @@ public class OrderedSuperArray extends SuperArray{
     }
     public int find(String target){
 	int i = size()/2;
-	for(double x = 0.5;i >= 0 && i < size();x/=2){
+	for(double x = size()/4;x % 1 == 0;x/=2){
 	    if(data[i].equals(target))
-	       break;
+	        break;
 	    else if(data[i].compareTo(target) > 0)
 		i -= x;
 	    else
-		i += x;		    
+		i += x;
+	}
+	if(!data[i].equals(target))
+	   return -1;
+	for(;i > 0;i--){
+	    if(!data[i-1].equals(target))
+		break;
 	}
 	return i;
     }

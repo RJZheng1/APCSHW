@@ -95,7 +95,7 @@ public class SuperArray{
 	    if(data[size()].equals(target))
 	       break;
 	}
-	if(i == data.length)
+	if(i == size())
 	    return -1;
 	return i;
     }
