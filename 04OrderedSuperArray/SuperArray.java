@@ -89,27 +89,36 @@ public class SuperArray{
             this.add(c.remove(0));
         }
     }
-    public static void main(String[] args){
-	/*
-	  Test of insertionSort()
-	  SuperArray a = new SuperArray();
-	  for(String i:new String[] {"Orange","Waffle","Blue","Red","Yellow","Potato","Banana"})
-	  a.add(i);
-	  System.out.println(a);
+    public int find(String target){
+	int i = 0;
+	for(;i < size();i++){
+	    if(data[size()].equals(target))
+	       break;
+	}
+	if(i == data.length)
+	    return -1;
+	return i;
+    }
+    /* 
+       public static void main(String[] args){
+       Test of insertionSort()
+       SuperArray a = new SuperArray();
+       for(String i:new String[] {"Orange","Waffle","Blue","Red","Yellow","Potato","Banana"})
+       a.add(i);
+       System.out.println(a);
 	  a.insertionSort();
 	  System.out.println(a);
-	*/
-	Random RNG = new Random();
-	for(int b = 1;b < 21;b++){
-	    System.out.println("Trial " + b);
-	    SuperArray supes1 = new SuperArray();
-	    SuperArray supes2 = new SuperArray();
-	    String[] rand = new String[10000];
+	  Random RNG = new Random();
+	  for(int b = 1;b < 21;b++){
+	  System.out.println("Trial " + b);
+	  SuperArray supes1 = new SuperArray();
+	  SuperArray supes2 = new SuperArray();
+	  String[] rand = new String[10000];
 	    for(int w = 0;w < 10000;w++){
-		String word = "";
-		for(int c = 0;c < 10;c++)
-		    word = word + (char)('a' + RNG.nextInt(26));
-		rand[w] = word;
+	    String word = "";
+	    for(int c = 0;c < 10;c++)
+	    word = word + (char)('a' + RNG.nextInt(26));
+	    rand[w] = word;
 	    }
 	    for(String s:rand ){
 		supes1.add(s);
@@ -126,6 +135,7 @@ public class SuperArray{
 	    long time2 = end2 - start2;
 	    System.out.println("Test 2: " + time2);
 	    System.out.println("Takes " + (100*Math.abs(time2 - time1)/time2) + "% less time");
-	}
-    }
+	    }
+	    }
+    */
 }
