@@ -90,20 +90,40 @@ public class SuperArray{
         }
     }
     public static void main(String[] args){
-	SuperArray g = new SuperArray();
+	SuperArray a = new SuperArray();
+	for(String i:new String[] {"Orange","Waffle","Blue","Red","Yellow","Potato","Banana"})
+	    a.add(i);
+	System.out.println(a);
+	a.insertionSort();
+	System.out.println(a);
 	Random RNG = new Random();
-	String[] rand = new String[100000];
-	for(int i = 0;i < 100000;i++){
-	    String word = "";
-	    for(int x = 0;x < 10;x++)
-		word = word + (char)('a' + RNG.nextInt(26));
-	    rand[i] = word;
+	for(int b = 0;b < 20;b++){
+	    SuperArray g = new SuperArray();
+	    String[] rand = new String[10000];
+	    for(int c = 0;c < 10000;c++){
+		String word = "";
+		for(int x = 0;x < 10;x++)
+		    word = word + (char)('a' + RNG.nextInt(26));
+		rand[c] = word;
+	    }
+	    for(String d:rand)
+		g.add(d);
+	    long start;
+	    long end;
+	    String test;
+	    if(b%2 == 0){
+		test = "insertionSort";
+		start = System.currentTimeMillis();
+		g.insertionSort();
+		end = System.currentTimeMillis();
+	    }
+	    else{
+		test = "badInsertionSort";
+		start = System.currentTimeMillis();
+		g.badInsertionSort();
+		end = System.currentTimeMillis();
+	    }
+	    System.out.println(test + " time: " + (end - start) );
 	}
-	for(String a:rand)
-	    g.add(a);
-	long start = System.currentTimeMillis();
-	g.insertionSort();
-	long end = System.currentTimeMillis();
-	System.out.println("time: " + (end - start) );
     }
 }
