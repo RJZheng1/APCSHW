@@ -80,14 +80,21 @@ public class SuperArray{
 	    }
 	}
     }
-    public void badInsertionSort(){
-        OrderedSuperArray c = new OrderedSuperArray();
-        while(this.size() > 0){ 
-            c.add(this.remove(0));
-        }
-        while(c.size() > 0){
-            this.add(c.remove(0));
-        }
+    public void selectionSort(){
+	for(int i = 0;i < size();i++){
+	    String min = data[i];
+	    int j = i;
+	    for(int x = i;x < size();x++){
+		if(data[x].compareTo(min) < 0){
+		    min = data[x];
+		    j = x;
+		}
+	    }
+	    set(j,set(i,min));
+	}
+    }
+    public void arraySort(){
+	Arrays.sort(data,0,size());
     }
     public int find(String target){
 	int i = 0;
@@ -99,43 +106,4 @@ public class SuperArray{
 	    return -1;
 	return i;
     }
-    /* 
-       public static void main(String[] args){
-       Test of insertionSort()
-       SuperArray a = new SuperArray();
-       for(String i:new String[] {"Orange","Waffle","Blue","Red","Yellow","Potato","Banana"})
-       a.add(i);
-       System.out.println(a);
-	  a.insertionSort();
-	  System.out.println(a);
-	  Random RNG = new Random();
-	  for(int b = 1;b < 21;b++){
-	  System.out.println("Trial " + b);
-	  SuperArray supes1 = new SuperArray();
-	  SuperArray supes2 = new SuperArray();
-	  String[] rand = new String[10000];
-	    for(int w = 0;w < 10000;w++){
-	    String word = "";
-	    for(int c = 0;c < 10;c++)
-	    word = word + (char)('a' + RNG.nextInt(26));
-	    rand[w] = word;
-	    }
-	    for(String s:rand ){
-		supes1.add(s);
-		supes2.add(s);
-	    }
-	    long start1 = System.currentTimeMillis();
-	    supes1.insertionSort();
-	    long end1 = System.currentTimeMillis();
-	    long time1 = end1 - start1;
-	    System.out.println("Test 1: " + time1);
-	    long start2 = System.currentTimeMillis();
-	    supes2.badInsertionSort();
-	    long end2 = System.currentTimeMillis();
-	    long time2 = end2 - start2;
-	    System.out.println("Test 2: " + time2);
-	    System.out.println("Takes " + (100*Math.abs(time2 - time1)/time2) + "% less time");
-	    }
-	    }
-    */
 }
