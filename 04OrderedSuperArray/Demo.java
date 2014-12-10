@@ -9,6 +9,5 @@ public class Demo{
 	    supes.insertionSort();
 	else
 	    supes.arraySort();
-	System.out.println(supes);
     }
 }
