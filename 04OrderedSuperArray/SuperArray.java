@@ -82,15 +82,12 @@ public class SuperArray{
     }
     public void selectionSort(){
 	for(int i = 0;i < size();i++){
-	    String min = data[i];
-	    int j = i;
-	    for(int x = i;x < size();x++){
-		if(data[x].compareTo(min) < 0){
-		    min = data[x];
-		    j = x;
-		}
+	    String min = i
+	    for(int x = i+1;x < size();x++){
+		if(data[x].compareTo(data[min]) < 0)
+		    min = x;
 	    }
-	    set(j,set(i,min));
+	    set(min,set(i,data[min]));
 	}
     }
     public void arraySort(){
