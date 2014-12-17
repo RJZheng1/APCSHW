@@ -1,7 +1,7 @@
 public class Sorts{
     public static void main(String[] args){
-	int[] a = new int[] {6,3,61,7,37,43,85};
-	bubble(a);
+	int[] a = new int[] {6,3,61,7,37,6,43,85};
+	selection(a);
 	for(int x:a)
 	    System.out.println(x);
     }
@@ -20,9 +20,9 @@ public class Sorts{
 		break;
 	}
     }
-    public void insertion(int[] c){
+    public static void insertion(int[] c){
 	for(int x = 1;x < c.length;x++){
-	    if(c[x] > c[x-1]){
+	    if(c[x] < c[x-1]){
 		int i = x-1;
 		int temp = c[x];
 		for(;i >= 0 && temp < c[i];i--)
@@ -31,19 +31,16 @@ public class Sorts{
 	    }
 	}
     }
-    public void selection(int[] c){
+    public static void selection(int[] c){
 	for(int i = 0;i < c.length;i++){
-	    int min = c[i];
-	    int j = i;
-	    for(int x = i;x < c.length;x++){
-		if(c[x] < min){
-		    min = c[x];
-		    j = x;
-		}
+	    int min = i;
+	    for(int x = i+1;x < c.length;x++){
+		if(c[x] < c[min])
+		    min = x;
 	    }
-	    int a = c[x-1];
-	    c[x-1] = c[x];
-	    c[x] = a;
+	    int a = c[i];
+	    c[i] = c[min];
+	    c[min] = a;
 	}
     }
 }
