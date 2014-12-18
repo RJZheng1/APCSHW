@@ -1,8 +1,16 @@
+import java.util.ArrayList;
+
 public class Sorts{
+    public static String name(){
+	return "Zheng,Ri Jiu";
+    }
+    public static int period(){
+	return 7;
+    }
     public static void bubble(int[] c){
+	int a;
 	for(int i = 1;i < c.length;i++){
 	    int swaps = 0;
-	    int a;
 	    for(int x = 0;x < c.length-i;x++){
 		if(c[x] > c[x+1]){
 		    a = c[x];
@@ -36,6 +44,16 @@ public class Sorts{
 	    int a = c[i];
 	    c[i] = c[min];
 	    c[min] = a;
+	}
+    }
+    public static void radix(int[] c){
+	ArrayList<ArrayList<Integer>> b = new ArrayList<ArrayList<Integer>>();
+	for(int i = 0;i < 10;i++)
+	    a.add(new ArrayList<Integer>);
+	for(int e = 0;a.get(0).size() < c.length;e++){
+	    for(int x:c){
+		
+	    }
 	}
     }
 }
