@@ -1,8 +1,10 @@
+import java.util.ArrayList;
+
 public class Sorts{
     public static void bubble(int[] c){
+	int a;
 	for(int i = 1;i < c.length;i++){
 	    int swaps = 0;
-	    int a;
 	    for(int x = 0;x < c.length-i;x++){
 		if(c[x] > c[x+1]){
 		    a = c[x];
@@ -36,6 +38,25 @@ public class Sorts{
 	    int a = c[i];
 	    c[i] = c[min];
 	    c[min] = a;
+	}
+    }
+    public static void radix(int[] c){
+	ArrayList<ArrayList<Integer>> bkt = new ArrayList<ArrayList<Integer>>();
+	for(int i = 0;i < 10;i++)
+	    bkt.add(new ArrayList<Integer>());
+	for(double m = 1;bkt.get(0).size() != c.length;m*=10){
+	    for(int i = 0;i < 10;i++)
+		bkt.get(i).clear();
+	    for(int i:c){
+		bkt.get(i/(int)m%10).add(i);
+	    }
+	    int x = 0;
+	    for(int o = 0;o < bkt.size();o++){
+		for(int i = 0;i < bkt.get(o).size();i++){
+		    c[x] = bkt.get(o).get(i);
+		    x++;
+		}
+	    }
 	}
     }
 }

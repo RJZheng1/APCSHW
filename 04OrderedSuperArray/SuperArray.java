@@ -82,7 +82,7 @@ public class SuperArray{
     }
     public void selectionSort(){
 	for(int i = 0;i < size();i++){
-	    String min = i
+	    int min = i;
 	    for(int x = i+1;x < size();x++){
 		if(data[x].compareTo(data[min]) < 0)
 		    min = x;

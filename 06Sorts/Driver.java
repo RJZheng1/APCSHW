@@ -1,5 +1,4 @@
 import java.util.Random;
-import java.util.Arrays;
 
 public class Driver{
     public static void main(String[]args){
@@ -29,8 +28,8 @@ public class Driver{
 	end = System.currentTimeMillis();
 	System.out.println("selection\n" + (end-start));
 	start = System.currentTimeMillis();
-	Arrays.sort(d);
+	Sorts.radix(d);
 	end = System.currentTimeMillis();
-	System.out.println("quicksort\n" + (end-start));
+	System.out.println("radix\n" + (end-start));
     }
 }
