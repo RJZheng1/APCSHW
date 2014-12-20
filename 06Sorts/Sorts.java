@@ -1,6 +1,12 @@
 import java.util.ArrayList;
 
 public class Sorts{
+    public static String name{
+	return "Zheng, Ri Jiu";
+    }
+    public static int period{
+	return 7;
+    }
     public static void bubble(int[] c){
 	int a;
 	for(int i = 1;i < c.length;i++){
