@@ -1,16 +1,16 @@
 import java.util.ArrayList;
 
 public class Sorts{
-    public static String name{
+    public static String name(){
 	return "Zheng, Ri Jiu";
     }
-    public static int period{
+    public static int period(){
 	return 7;
     }
     public static void bubble(int[] c){
 	int a;
+	int swaps = 0;
 	for(int i = 1;i < c.length;i++){
-	    int swaps = 0;
 	    for(int x = 0;x < c.length-i;x++){
 		if(c[x] > c[x+1]){
 		    a = c[x];
