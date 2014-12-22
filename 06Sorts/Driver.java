@@ -9,12 +9,14 @@ public class Driver{
 	int[] b = new int[10000];
 	int[] c = new int[10000];
 	int[] d = new int[10000];
+	int[] e = new int[10000];
 	for(int x = 0;x < 10000;x++){
 	    int n = RNG.nextInt(Integer.MAX_VALUE);
 	    a[x] = n;
 	    b[x] = n;
 	    c[x] = n;
 	    d[x] = n;
+	    e[x] = n;
 	}
 	start = System.currentTimeMillis();
 	Sorts.bubble(a);
@@ -29,7 +31,11 @@ public class Driver{
 	end = System.currentTimeMillis();
 	System.out.println("selection\n" + (end-start));
 	start = System.currentTimeMillis();
-	Arrays.sort(d);
+	Sorts.radix(d);
+	end = System.currentTimeMillis();
+	System.out.println("radix\n" + (end-start));
+	start = System.currentTimeMillis();
+	Arrays.sort(e);
 	end = System.currentTimeMillis();
 	System.out.println("quicksort\n" + (end-start));
     }
